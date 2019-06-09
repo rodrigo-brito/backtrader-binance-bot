@@ -3,18 +3,21 @@
 import backtrader as bt
 
 from config import ENV, PRODUCTION
-from indicators.macd_hist import MACDHistSMA
-from indicators.stoch_rsi import StochRSI
 from strategies.base import StrategyBase
 
 
 class BasicRSI(StrategyBase):
+    params = dict(
+        period_ema_fast=10,
+        period_ema_slow=100
+    )
+
     def __init__(self):
         StrategyBase.__init__(self)
-        self.log("Using StochRSI strategy")
+        self.log("Using RSI/EMA strategy")
 
-        self.sma_fast = bt.indicators.MovingAverageSimple(self.data0.close, period=20)
-        self.sma_slow = bt.indicators.MovingAverageSimple(self.data0.close, period=200)
+        self.ema_fast = bt.indicators.EMA(period=self.p.period_ema_fast)
+        self.ema_slow = bt.indicators.EMA(period=self.p.period_ema_slow)
         self.rsi = bt.indicators.RelativeStrengthIndex()
 
         self.profit = 0
@@ -27,11 +30,10 @@ class BasicRSI(StrategyBase):
     def next(self):
         self.update_indicators()
 
-        if self.status != "LIVE" and ENV == PRODUCTION:
-            self.log("%s - $%.2f" % (self.status, self.data0.close[0]))
+        if self.status != "LIVE" and ENV == PRODUCTION:  # waiting for live status in production
             return
 
-        if self.order:
+        if self.order:  # waiting for pending order
             return
 
         # stop Loss
@@ -40,7 +42,7 @@ class BasicRSI(StrategyBase):
             self.short()
 
         if self.last_operation != "BUY":
-            if self.rsi < 30 and self.sma_fast > self.sma_slow:
+            if self.rsi < 30 and self.ema_fast > self.ema_slow:
                 self.long()
 
         if self.last_operation != "SELL":

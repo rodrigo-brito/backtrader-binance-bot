@@ -55,7 +55,7 @@ class StrategyBase(bt.Strategy):
             return self.buy()
 
         cash, value = self.broker.get_wallet_balance(COIN_REFER)
-        amount = (value / price) * 0.99
+        amount = (value / price) * 0.99  # Workaround to avoid precision issues
         self.log("Buy ordered: $%.2f. Amount %.6f %s. Ballance $%.2f USDT" % (self.data0.close[0],
                                                                               amount, COIN_TARGET, value), True)
         return self.buy(size=amount)

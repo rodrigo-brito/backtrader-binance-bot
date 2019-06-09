@@ -27,14 +27,13 @@ Start application
 
 ```
 Starting Portfolio Value: 100000.00
-Final Portfolio Value: 110135.28
+Final Portfolio Value: 119192.61
 
-Profit 10.135%
+Profit 19.193%
 Trade Analysis Results:
                Total Open     Total Closed   Total Won      Total Lost     
-               0              20             12             8              
+               0              10             7              3              
                Strike Rate    Win Streak     Losing Streak  PnL Net        
-               1              3              2              10135.28       
-SQN: 0.64
-
+               1              5              2              19192.61       
+SQN: 1.75
 ```

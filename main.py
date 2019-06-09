@@ -74,7 +74,7 @@ def main():
         cerebro.resampledata(data, timeframe=bt.TimeFrame.Minutes, compression=30)
 
         broker = cerebro.getbroker()
-        broker.setcommission(commission=0.001, name=COIN_TARGET)
+        broker.setcommission(commission=0.001, name=COIN_TARGET)  # Simulating exchange fee
         broker.setcash(100000.0)
         cerebro.addsizer(FullMoney)
 
@@ -86,14 +86,15 @@ def main():
     # Include Strategy
     cerebro.addstrategy(BasicRSI)
 
-    # Print analyzers - results
+    # Starting backtrader bot
     initial_value = cerebro.broker.getvalue()
     print('Starting Portfolio Value: %.2f' % initial_value)
     result = cerebro.run()
+
+    # Print analyzers - results
     final_value = cerebro.broker.getvalue()
     print('Final Portfolio Value: %.2f' % final_value)
     print('Profit %.3f%%' % ((final_value - initial_value) / initial_value * 100))
-
     print_trade_analysis(result[0].analyzers.ta.get_analysis())
     print_sqn(result[0].analyzers.sqn.get_analysis())
 
