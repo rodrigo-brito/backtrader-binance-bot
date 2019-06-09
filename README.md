@@ -1,7 +1,7 @@
 # Backtrader Binance Bot
 A example of bot using Backtrader to trade Bitcoins in Binance Exchange.
 
-Presentation in TDC Belo Horizonte 2018 (Portuguese)
+Presentation in [TDC Belo Horizonte 2019](http://www.thedevelopersconference.com.br/tdc/2019/belohorizonte/trilha-python) (pt-BR)
 - https://slides.com/rodrigo73/criptomoedas-tdc-2019
 
 ### Installation
