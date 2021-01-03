@@ -1,4 +1,4 @@
-backtrader==1.9.69.122
+backtrader==1.9.76.123
 matplotlib==2.2.3
 cryptocmd==0.5.2
 pandas==0.24.1
