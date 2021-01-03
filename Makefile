@@ -8,4 +8,4 @@ build-docker:
 	docker build -t rodrigobrito/backtrader .
 
 run:
-	docker run -ti -v`pwd`:/app -d -e ENVIRONMENT=production vulcan
+	docker run -ti -v`pwd`:/app -d -e ENVIRONMENT=production rodrigobrito/backtrader
